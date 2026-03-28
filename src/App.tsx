@@ -1,11 +1,12 @@
 import { useState, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Home, CalendarDays, ClipboardList, Map, Trophy, User } from 'lucide-react'
+import { Home, CalendarDays, ClipboardList, Users, Trophy, User } from 'lucide-react'
 import { Toaster } from 'react-hot-toast'
 import Dashboard from './pages/Dashboard'
 import Booking from './pages/Booking'
 import Scorecard from './pages/Scorecard'
 import Courses from './pages/Courses'
+import Activity from './pages/Activity'
 import Leaderboard from './pages/Leaderboard'
 import Profile from './pages/Profile'
 
@@ -13,7 +14,7 @@ const tabs = [
   { id: 'home', label: 'Home', icon: Home },
   { id: 'book', label: 'Book', icon: CalendarDays },
   { id: 'score', label: 'Score', icon: ClipboardList },
-  { id: 'courses', label: 'Courses', icon: Map },
+  { id: 'social', label: 'Social', icon: Users },
   { id: 'leaders', label: 'Leaders', icon: Trophy },
   { id: 'profile', label: 'Profile', icon: User },
 ]
@@ -22,6 +23,7 @@ const pages: Record<string, React.FC<{ onNavigate: (tab: string) => void }>> = {
   home: Dashboard,
   book: Booking,
   score: Scorecard,
+  social: Activity,
   courses: Courses,
   leaders: Leaderboard,
   profile: Profile,

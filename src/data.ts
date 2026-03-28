@@ -151,6 +151,77 @@ export const weather = {
   sunset: '20:18',
 }
 
+// Social / Strava-style data
+export interface Activity {
+  id: string
+  playerId: string
+  type: 'round' | 'achievement' | 'challenge_complete'
+  courseId?: string
+  score?: number
+  toPar?: number
+  birdies?: number
+  date: string
+  timeAgo: string
+  likes: number
+  comments: number
+  likedByMe: boolean
+  message?: string
+}
+
+export interface Challenge {
+  id: string
+  title: string
+  description: string
+  icon: string
+  endsIn: string
+  participants: string[] // player ids
+  progress: Record<string, number> // playerId -> progress value
+  goal: number
+  unit: string
+  type: 'lowest_score' | 'most_birdies' | 'most_rounds' | 'lowest_putts'
+}
+
+export interface FriendRequest {
+  playerId: string
+  mutual: number
+}
+
+// Friends (subset of players that are "your friends")
+export const friends = ['p2', 'p4', 'p7', 'p8']
+
+export const activityFeed: Activity[] = [
+  { id: 'act1', playerId: 'p7', type: 'round', courseId: 'bogstad', score: 67, toPar: -5, birdies: 6, date: '2026-03-27', timeAgo: '2h ago', likes: 12, comments: 3, likedByMe: false },
+  { id: 'act2', playerId: 'p2', type: 'achievement', date: '2026-03-27', timeAgo: '5h ago', likes: 8, comments: 1, likedByMe: true, message: 'Unlocked "Eagle Eye" 🦅' },
+  { id: 'act3', playerId: 'p4', type: 'round', courseId: 'oslo-gc', score: 71, toPar: 0, birdies: 4, date: '2026-03-26', timeAgo: '1d ago', likes: 15, comments: 5, likedByMe: false },
+  { id: 'act4', playerId: 'p8', type: 'round', courseId: 'losby', score: 78, toPar: 6, birdies: 2, date: '2026-03-26', timeAgo: '1d ago', likes: 4, comments: 0, likedByMe: false },
+  { id: 'act5', playerId: 'p1', type: 'challenge_complete', date: '2026-03-25', timeAgo: '2d ago', likes: 6, comments: 2, likedByMe: false, message: 'Completed "March Madness" challenge! 🏆' },
+  { id: 'act6', playerId: 'p7', type: 'round', courseId: 'oslo-gc', score: 69, toPar: -2, birdies: 5, date: '2026-03-25', timeAgo: '2d ago', likes: 18, comments: 7, likedByMe: true },
+  { id: 'act7', playerId: 'p2', type: 'round', courseId: 'bogstad', score: 74, toPar: 2, birdies: 3, date: '2026-03-24', timeAgo: '3d ago', likes: 7, comments: 1, likedByMe: false },
+]
+
+export const challenges: Challenge[] = [
+  {
+    id: 'ch1', title: 'March Madness', description: 'Lowest total score across 3 rounds', icon: '🔥',
+    endsIn: '4 days', participants: ['p1', 'p2', 'p4', 'p7', 'p8'],
+    progress: { p1: 238, p2: 225, p4: 212, p7: 203, p8: 234 }, goal: 0, unit: 'strokes', type: 'lowest_score',
+  },
+  {
+    id: 'ch2', title: 'Birdie Hunter', description: 'Most birdies this week', icon: '🐦',
+    endsIn: '2 days', participants: ['p1', 'p2', 'p4', 'p7'],
+    progress: { p1: 3, p2: 7, p4: 9, p7: 14 }, goal: 0, unit: 'birdies', type: 'most_birdies',
+  },
+  {
+    id: 'ch3', title: 'Weekend Warrior', description: 'Play 5 rounds this month', icon: '💪',
+    endsIn: '4 days', participants: ['p1', 'p2', 'p3', 'p4', 'p7', 'p8'],
+    progress: { p1: 4, p2: 5, p3: 2, p4: 5, p7: 7, p8: 3 }, goal: 5, unit: 'rounds', type: 'most_rounds',
+  },
+]
+
+export const friendRequests: FriendRequest[] = [
+  { playerId: 'p3', mutual: 2 },
+  { playerId: 'p6', mutual: 1 },
+]
+
 export const achievements = [
   { id: 'a1', name: 'First Birdie', icon: '🐦', description: 'Score your first birdie', unlocked: true },
   { id: 'a2', name: 'Eagle Eye', icon: '🦅', description: 'Score an eagle', unlocked: true },
